@@ -6,38 +6,54 @@ import {
   StyleSheet,
   TouchableOpacity,
   Dimensions,
+  View,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/core";
 
 import wateringImg from "../assets/watering.png";
 import colors from "../../styles/colors";
+import fonts from "../../styles/fonts";
 
 export default function Welcome() {
+  const navigation = useNavigation();
+
+  function handleStart() {
+    navigation.navigate("UserIdentification");
+  }
+
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>
-        Gerencie suas plantas {"\n"}de forma fácil
-      </Text>
-      <Image source={wateringImg} style={styles.image} resizeMode="contain" />
-      <Text style={styles.subtitle}>
-        Não esqueça mais de regar suas plantas.{"\n"} Nós cuidamos de lembrar
-        você sempre que precisar.
-      </Text>
-      <TouchableOpacity style={styles.button} activeOpacity={0.5}>
-        <Text>
-          <Feather name="chevron-right" style={styles.buttonIcon} />
+      <View style={styles.wrapper}>
+        <Text style={styles.title}>
+          Gerencie suas plantas {"\n"}de forma fácil
         </Text>
-      </TouchableOpacity>
+        <Image source={wateringImg} style={styles.image} resizeMode="contain" />
+        <Text style={styles.subtitle}>
+          Não esqueça mais de regar suas plantas.{"\n"} Nós cuidamos de lembrar
+          você sempre que precisar.
+        </Text>
+        <TouchableOpacity
+          style={styles.button}
+          activeOpacity={0.5}
+          onPress={handleStart}
+        >
+          <Feather name="chevron-right" style={styles.buttonIcon} />
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  wrapper: {
     flex: 1,
     alignItems: "center",
     justifyContent: "space-around",
     margin: 5,
+  },
+  container: {
+    flex: 1,
   },
   title: {
     fontSize: 32,
@@ -45,12 +61,14 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: colors.heading,
     marginTop: 80,
+    fontFamily: fonts.heading,
   },
   subtitle: {
     textAlign: "center",
     fontSize: 18,
     paddingHorizontal: 20,
     color: colors.heading,
+    fontFamily: fonts.text,
   },
   image: {
     height: Dimensions.get("window").width * 0.7,
@@ -66,6 +84,6 @@ const styles = StyleSheet.create({
   },
   buttonIcon: {
     color: colors.white,
-    fontSize: 45, 
+    fontSize: 45,
   },
 });

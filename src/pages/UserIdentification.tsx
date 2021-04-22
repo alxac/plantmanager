@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/core";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   SafeAreaView,
   StyleSheet,
@@ -10,8 +10,9 @@ import {
   Platform,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert,
 } from "react-native";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import colors from "../../styles/colors";
 import fonts from "../../styles/fonts";
 import { Button } from "../components/Button";
@@ -36,7 +37,10 @@ export function UserIdentification() {
     setName(value);
   }
 
-  function handleStart() {
+  async function handleStart() {
+    if (!name) return Alert.alert("è necessário inserir seu nome");
+
+    await AsyncStorage.setItem("@plantmanager:user", name);
     navigation.navigate("Confirmation");
   }
 

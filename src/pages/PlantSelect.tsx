@@ -1,5 +1,6 @@
+import { useNavigation } from "@react-navigation/core";
 import React, { useEffect, useState } from "react";
-import { Text, View, StyleSheet, ActivityIndicator } from "react-native";
+import { Text, View, StyleSheet, ActivityIndicator, Alert } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import colors from "../../styles/colors";
 import fonts from "../../styles/fonts";
@@ -33,10 +34,9 @@ export function PlantSelect() {
   const [filtredPlants, setFiltredPlants] = useState<PlantProps[]>([]);
   const [selected, setSelected] = useState("all");
   const [loading, setLoading] = useState(true);
-
   const [page, setPage] = useState(1);
   const [loadingMore, setLoadingMore] = useState(false);
-  const [loadedAll, setLoadedAll] = useState(false);
+  const navigation = useNavigation();
 
   function handleEnviromentSelected(enviroment: string) {
     setSelected(enviroment);
@@ -86,6 +86,11 @@ export function PlantSelect() {
     setLoadingMore(false);
   }
 
+  function handlePlanSelect(plant: any) {
+    Alert.alert(plant.id);
+    navigation.navigate('PlantSave')
+  }
+
   function handleFetchMore(distance: number) {
     if (distance < 1) return;
 
@@ -106,6 +111,7 @@ export function PlantSelect() {
       <View>
         <FlatList
           data={enviroment}
+          keyExtractor={(item) => String(item.key)}
           renderItem={({ item }) => (
             <EnviromentButton
               title={item.title}
@@ -123,7 +129,14 @@ export function PlantSelect() {
       <View style={styles.plants}>
         <FlatList
           data={filtredPlants}
-          renderItem={({ item }) => <PlanCardPrimary data={item} />}
+          keyExtractor={(item) => String(item.id)}
+          renderItem={({ item }) => (
+            <PlanCardPrimary
+              data={item}
+              onPress={() => handlePlanSelect(item)}
+              /*ERRO*/
+            />
+          )}
           showsHorizontalScrollIndicator={false}
           numColumns={2}
           onEndReachedThreshold={0.1}

@@ -66,6 +66,6 @@ const styles = StyleSheet.create({
   },
   buttonIcon: {
     color: colors.white,
-    fontSize: 45,
+    fontSize: 45, 
   },
 });

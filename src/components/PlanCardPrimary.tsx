@@ -12,14 +12,14 @@ interface PlantProps extends RectButtonProps {
   };
 }
 
-export const PlanCardPrimary = ({ data, ...rest }: PlantProps) => {
+export function PlanCardPrimary({ data, ...rest }: PlantProps) {
   return (
-    <RectButton style={styles.container}>
+    <RectButton style={styles.container} {...rest}>
       <SvgFromUri uri={data.photo} width={70} height={70} />
       <Text style={styles.text}>{data.name}</Text>
     </RectButton>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {

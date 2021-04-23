@@ -87,8 +87,7 @@ export function PlantSelect() {
   }
 
   function handlePlanSelect(plant: any) {
-    Alert.alert(plant.id);
-    navigation.navigate('PlantSave')
+    navigation.navigate("PlantSave", { plant });
   }
 
   function handleFetchMore(distance: number) {

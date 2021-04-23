@@ -28,25 +28,23 @@ export function PlantSave() {
   const { plant } = route.params as Params;
 
   return (
-    <>
-      <View style={styles.container}>
-        <View style={styles.plantInfo}>
-          <SvgFromUri uri={plant.photo} height={150} width={150} />
-          <Text style={styles.plantName}>{plant.name}</Text>
-          <Text style={styles.plantAbout}>{plant.about}</Text>
-        </View>
+    <View style={styles.container}>
+      <View style={styles.plantInfo}>
+        <SvgFromUri uri={plant.photo} height={150} width={150} />
+        <Text style={styles.plantName}>{plant.name}</Text>
+        <Text style={styles.plantAbout}>{plant.about}</Text>
       </View>
       <View style={styles.controller}>
         <View style={styles.tipConteiner}>
           <Image source={waterdropImg} style={styles.tipImage} />
-          <Text style={styles.tipText}>Lorem</Text>
+          <Text style={styles.tipText}>{plant.water_tips}</Text>
         </View>
         <Text style={styles.alertLabel}>
-            Escolha o melhor horário para ser lembrado:
+          Escolha o melhor horário para ser lembrado:
         </Text>
         <Button title="Cadastrar Planta" onPress={() => {}} />
       </View>
-    </>
+    </View>
   );
 }
 
@@ -66,7 +64,7 @@ const styles = StyleSheet.create({
   controller: {
     backgroundColor: colors.white,
     paddingHorizontal: 20,
-    paddingTop: 20,
+    paddingTop: 80,
     paddingBottom: getBottomSpace() || 20,
   },
   plantName: {
@@ -80,10 +78,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     backgroundColor: colors.blue_light,
-    paddingBottom: 20,
+    padding: 20,
     borderRadius: 20,
     position: "relative",
-    bottom: 60,
+    bottom: 120,
   },
   tipImage: {
     width: 56,
@@ -104,5 +102,11 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginBottom: 5,
   },
-  plantAbout: {},
+  plantAbout: {
+    textAlign: "center",
+    fontFamily: fonts.text,
+    color: colors.heading,
+    fontSize: 17,
+    marginTop: 10,
+  },
 });

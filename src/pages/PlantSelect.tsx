@@ -8,24 +8,12 @@ import { EnviromentButton } from "../components/EnviromentButton";
 import { Header } from "../components/Header";
 import { Load } from "../components/Load";
 import { PlanCardPrimary } from "../components/PlanCardPrimary";
+import { PlantProps } from "../libs/storage";
 import api from "../services/api";
 
 interface EnviromentProps {
   key: string;
   title: string;
-}
-
-interface PlantProps {
-  id: string;
-  name: string;
-  about: string;
-  water_tips: string;
-  photo: string;
-  environments: [string];
-  frequency: {
-    times: number;
-    repeat_every: string;
-  };
 }
 
 export function PlantSelect() {

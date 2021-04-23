@@ -16,3 +16,4 @@ expo install @react-native-async-storage/async-storage
 expo install @react-native-community/datetimepicker
 npm install date-fns --save
 npm install @react-navigation/bottom-tabs
+expo install expo-notifications

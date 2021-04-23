@@ -1,19 +1,43 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, Image, Text, FlatList } from "react-native";
+import { View, StyleSheet, Image, Text, FlatList, Alert } from "react-native";
 import colors from "../../styles/colors";
 import { Header } from "../components/Header";
 import waterdropImg from "../../src/assets/waterdrop.png";
-import { loadPlant, PlantProps } from "../libs/storage";
+import { loadPlant, PlantProps, removePlant } from "../libs/storage";
 import { formatDistance } from "date-fns";
-import { ptBR } from "date-fns/locale";
+import { da, ptBR } from "date-fns/locale";
 import fonts from "../../styles/fonts";
 import { PlanCardSecondary } from "../components/PlanCardSecondary";
 import { Load } from "../components/Load";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export function MyPlants() {
   const [myPlants, setMyPlants] = useState<PlantProps[]>([]);
   const [loading, setLoading] = useState(true);
   const [nextWatered, setNextWatered] = useState<string>();
+
+  function handleRemove(plant: PlantProps) {
+    Alert.alert("Remover", `Deseja remover a ${plant.name}?`, [
+      {
+        text: "Não",
+        style: "cancel",
+        onPress: () => {},
+      },
+      {
+        text: "Sim",
+        onPress: async () => {
+          try {
+            await removePlant(plant.id);
+            setMyPlants((oldData) =>
+              oldData.filter((item) => item.id != plant.id)
+            );
+          } catch (error) {
+            Alert.alert("Não foi possível remover");
+          }
+        },
+      },
+    ]);
+  }
 
   useEffect(() => {
     async function loadStorageData() {
@@ -49,7 +73,12 @@ export function MyPlants() {
         <FlatList
           data={myPlants}
           keyExtractor={(item) => String(item.id)}
-          renderItem={({ item }) => <PlanCardSecondary data={item} />}
+          renderItem={({ item }) => (
+            <PlanCardSecondary
+              handleRemove={() => handleRemove(item)}
+              data={item}
+            />
+          )}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ flex: 1 }}
         />

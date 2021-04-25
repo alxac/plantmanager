@@ -5,15 +5,16 @@ https://nextlevelweek.com/episodios/reactnative/2/edicao/5
 npm run android
 expo install @expo/vector-icons
 expo install expo-app-loading
-npm install @react-navigation/native
+expo install react-native-svg
+expo install @react-native-async-storage/async-storage
+expo install @react-native-community/datetimepicker
 expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
+expo install expo-notifications
+npm install @react-navigation/native
 npm install @react-navigation/stack
 npm i react-native-iphone-x-helper --save
 npm i axios
 npm i -g json-server
-expo install react-native-svg
-expo install @react-native-async-storage/async-storage
-expo install @react-native-community/datetimepicker
 npm install date-fns --save
 npm install @react-navigation/bottom-tabs
-expo install expo-notifications
+json-server ./src/services/server.json --host 192.168.18.12 --port 3333

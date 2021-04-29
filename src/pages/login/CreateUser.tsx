@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { View, Text, ScrollView, TextInput, StyleSheet } from "react-native";
 import { Button } from "../../components/Button";
-// import firebase from "../../services/firebase";
+import firebase from "../../services/firebase";
 
-const CreateUser = () => {
+const CreateUser = (props: any) => {
   const [state, setState] = useState({
     name: "",
     email: "",
@@ -14,11 +14,20 @@ const CreateUser = () => {
   };
 
   const save = async () => {
-    // await firebase.db.collection("usuarios").add({
-    //   name: state.name,
-    //   email: state.email,
-    // });
-    alert("add");
+    if (state.name === "") {
+      alert("Digite um nome");
+    } else {
+      try {
+        await firebase.db.collection("usuarios").add({
+          name: state.name,
+          email: state.email,
+        });
+        props.navigation.navigate("UserList");
+      } catch (error) {
+        console.log(error);
+      }
+      alert("add");
+    }
   };
 
   return (

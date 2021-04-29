@@ -6,6 +6,9 @@ import { UserIdentification } from "../pages/UserIdentification";
 import { Confirmation } from "../pages/Confirmation";
 import { PlantSave } from "../pages/PlantSave";
 import AuthRoutes from "./tab.routes";
+import CreateUser from "../pages/login/CreateUser";
+import UserList from "../pages/login/UserList";
+import UserDetails from "../pages/login/UserDetails";
 
 const stackRoutes = createStackNavigator();
 
@@ -18,8 +21,18 @@ const AppRoutes: React.FC = () => (
       },
     }}
   >
+    <stackRoutes.Screen name="UserList" component={UserList} />
+    <stackRoutes.Screen name="CreateUser" component={CreateUser} />
+    <stackRoutes.Screen
+      name="UserDetails"
+      component={UserDetails}
+      options={{ title: "Editando" }}
+    />
     <stackRoutes.Screen name="Welcome" component={Welcome} />
-    <stackRoutes.Screen name="UserIdentification" component={UserIdentification} />
+    <stackRoutes.Screen
+      name="UserIdentification"
+      component={UserIdentification}
+    />
     <stackRoutes.Screen name="Confirmation" component={Confirmation} />
     <stackRoutes.Screen name="PlantSelect" component={AuthRoutes} />
     <stackRoutes.Screen name="PlantSave" component={PlantSave} />

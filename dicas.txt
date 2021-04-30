@@ -18,3 +18,4 @@ npm i -g json-server
 npm install date-fns --save
 npm install @react-navigation/bottom-tabs
 json-server ./src/services/server.json --host 192.168.18.12 --port 3333
+expo build:android -t apk
